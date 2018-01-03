@@ -29,6 +29,8 @@ object JarSelector extends ExtSelector {
 @deprecating("https://github.com/ensime/ensime-server/issues/1437")
 object ClassfileSelector extends ExtSelector {
   val include = Set("class")
+  override def traverseDescendents(info: FileSelectInfo) =
+    info.getFile.getName.getBaseName != "META-INF"
 }
 
 @deprecating("https://github.com/ensime/ensime-server/issues/1437")
