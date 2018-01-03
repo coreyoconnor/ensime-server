@@ -26,6 +26,11 @@ final class ClassfileIndexer(file: FileObject) extends SLF4JLogging {
       val receiver = new AsmCallback
       reader.accept(receiver, ClassReader.SKIP_FRAMES)
       receiver
+    } catch {
+      case ex: Throwable => {
+        log.warn(s"failure indexing classfile ${name}")
+        throw ex
+      }
     } finally in.close()
 
     raw.clazz
